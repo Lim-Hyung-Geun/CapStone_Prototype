@@ -1,0 +1,32 @@
+name: Node.js React CI
+
+# 언제 실행할까? (main 브랜치에 push하거나 pull request가 올 때)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 내 깃허브 코드를 이 작업 환경으로 가져오기
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Node.js 설치 (버전은 프로젝트에 맞게 수정 가능)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 사용 중인 노드 버전에 맞추세요 (18, 20 등)
+          cache: 'npm'       # 빌드 속도를 높이기 위해 캐시 사용
+
+      # 3. 라이브러리 설치 (npm install)
+      - name: Install dependencies
+        run: npm install
+
+      # 4. 리액트 빌드 테스트 (npm run build)
+      - name: Build React app
+        run: npm run build

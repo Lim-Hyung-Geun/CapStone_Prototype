@@ -1,73 +1,119 @@
-# React + TypeScript + Vite
+# 🌏 트래블 로그 (Travel Log)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 세계 지도를 탐색하고, 국내 여행 코스를 추천받는 모바일 여행 앱 프로토타입
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 프로젝트 소개
 
-## React Compiler
+**트래블 로그**는 인터랙티브 세계 지도를 기반으로 여행 정보를 탐색하고, 지역별 추천 명소와 맞춤 코스를 제공하는 여행 앱입니다.  
+대한민국 17개 시/도의 유명 명소, 맛집, 액티비티 정보와 함께 하루 코스 추천 기능을 제공합니다.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ 주요 기능
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🗺️ 인터랙티브 지도
+- 세계 지도에서 국가 클릭 → 해당 국가 상세 지도로 드릴다운
+- 대한민국 및 일본의 시/도·도도부현 단위 지역 선택 지원
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 📍 지역별 명소 추천
+- 각 시/도 선택 시 **명소 / 맛집 / 액티비티** 카테고리별 추천 정보 표시
+- 명소 카드 탭 → 상세 주소, 상세 설명, 연관 코스 확인
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 📋 하루 코스 추천
+- **명소 관광 코스** / **액티비티 코스** 2가지 분야로 구분
+- 시간대별 일정이 타임라인 형태로 표시
+- 코스 전체 담기 또는 개별 일정만 선택 저장 가능
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🔖 코스 저장 & 관리
+- 담은 코스와 선택한 일정을 **기록** 탭에서 한눈에 확인
+- 불필요한 항목 개별 삭제 가능
+
+---
+
+## 🛠️ 기술 스택
+
+| 분류 | 사용 기술 |
+|------|-----------|
+| 프레임워크 | React 19 + TypeScript |
+| 빌드 도구 | Vite 7 |
+| 지도 라이브러리 | react-simple-maps v3 (D3-geo 기반) |
+| 아이콘 | lucide-react |
+| 스타일 | 순수 CSS (CSS 변수 활용) |
+
+---
+
+## 📁 프로젝트 구조
+
+```
+travel-app/
+├── src/
+│   ├── App.tsx                  # 메인 앱 (지도·UI 전체 로직)
+│   ├── main.tsx                 # React 진입점
+│   ├── index.css                # 전역 스타일
+│   ├── data/
+│   │   ├── recommendations.ts   # 지역별 명소·맛집·액티비티 데이터
+│   │   └── courses.ts           # 지역별 하루 코스 데이터
+│   └── utils/
+│       └── countryNames.ts      # 국가·지역명 한국어 변환 유틸
+├── public/
+├── package.json
+└── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 시작하기
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 사전 요구사항
+
+- Node.js 18 이상
+- npm 또는 yarn
+
+### 설치 및 실행
+
+```bash
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
+npm run dev
+
+# 프로덕션 빌드
+npm run build
+
+# 빌드 결과 미리보기
+npm run preview
 ```
+
+개발 서버 실행 후 브라우저에서 `http://localhost:5173` 으로 접속합니다.
+
+---
+
+## 📊 데이터 범위
+
+### 대한민국 (16개 시/도)
+서울 · 부산 · 대구 · 인천 · 광주 · 대전 · 울산 · 경기 · 강원 · 충북 · 충남 · 전북 · 전남 · 경북 · 경남 · 제주
+
+> 세종특별자치시는 사용 중인 지도 데이터에 포함되어 있지 않습니다.
+
+### 일본 (4개 지역)
+도쿄 · 오사카 · 교토 · 홋카이도
+
+---
+
+## 🗂️ 탭 구성
+
+| 탭 | 설명 |
+|----|------|
+| 🗺️ 지도 | 세계 지도 탐색 및 지역별 명소·코스 추천 |
+| 📖 기록 | 저장한 코스 및 선택 일정 관리 |
+| ✨ 추천 | AI 기반 여행지 추천 (확장 예정) |
+| 👤 프로필 | 사용자 정보 및 저장 현황 확인 |
+
+---
+
+## 📝 라이선스
+
+본 프로젝트는 경북대학교 캡스톤 디자인 수업의 결과물입니다.

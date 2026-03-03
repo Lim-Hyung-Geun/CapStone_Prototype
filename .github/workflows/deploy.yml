@@ -27,7 +27,7 @@ jobs:
           node-version: 20
 
       - name: 의존성 설치
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: 프로젝트 빌드
         run: npm run build
